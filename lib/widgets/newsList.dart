@@ -7,7 +7,8 @@ class NewsList extends StatelessWidget {
   final List<NewsArticleViewModel> articles;
   final Function(NewsArticleViewModel article) onSelected;
 
-  NewsList({required this.articles, required this.onSelected});
+  // ignore: use_key_in_widget_constructors
+  const NewsList({required this.articles, required this.onSelected});
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +22,8 @@ class NewsList extends StatelessWidget {
             onSelected(article);
           },
           leading: SizedBox(
-              width: 100,
-              height: 100,
+              width: 60,
+              height: 60,
               child: article.imageURL == ""
                   ? Image.asset("images/news-placeholder.png")
                   : Image.network(article.imageURL)),

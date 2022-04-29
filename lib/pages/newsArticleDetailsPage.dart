@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../viewmodels/newsArticleViewModel.dart';
@@ -11,10 +12,18 @@ class NewsArticleDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(title: Text(article.title)),
-        body: WebView(
-          initialUrl: article.url,
-        ));
+    return SafeArea(
+      child: Scaffold(
+          appBar: AppBar(
+            title: Text(
+              article.title,
+              style: GoogleFonts.montserrat(),
+            ),
+            backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+          ),
+          body: WebView(
+            initialUrl: article.url,
+          )),
+    );
   }
 }

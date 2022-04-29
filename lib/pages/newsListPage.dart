@@ -1,13 +1,14 @@
+import 'package:app_articles_news/widgets/widgets.dart';
 import 'package:flutter/material.dart';
-
 import 'package:provider/provider.dart';
-
 import '../viewmodels/newsArticleListViewModel.dart';
 import '../viewmodels/newsArticleViewModel.dart';
 import '../widgets/newsList.dart';
 import 'newsArticleDetailsPage.dart';
 
 class NewsListPage extends StatefulWidget {
+  const NewsListPage({Key? key}) : super(key: key);
+
   @override
   _NewsListPageState createState() => _NewsListPageState();
 }
@@ -52,31 +53,36 @@ class _NewsListPageState extends State<NewsListPage> {
   Widget build(BuildContext context) {
     final vm = Provider.of<NewsArticleListViewModel>(context);
 
-    return Scaffold(
-        appBar: AppBar(title: Text("Top News")),
-        body: Column(children: <Widget>[
-          TextField(
-            controller: _controller,
-            onSubmitted: (value) {
-              // fetch all the news related to the keyword
-              if (value.isNotEmpty) {
-                vm.search(value);
-              }
-            },
-            decoration: InputDecoration(
-                labelText: "Enter search term",
-                icon: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Icon(Icons.search),
-                ),
-                suffixIcon: IconButton(
-                  icon: Icon(Icons.clear),
-                  onPressed: () {
-                    _controller.clear();
-                  },
-                )),
+    return SafeArea(
+      child: Scaffold(
+          appBar: PreferredSize(
+            preferredSize: const Size.fromHeight(100),
+            child: StyledAppBar(),
           ),
-          _buildList(context, vm)
-        ]));
+          body: Column(children: <Widget>[
+            TextField(
+              controller: _controller,
+              onSubmitted: (value) {
+                // fetch all the news related to the keyword
+                if (value.isNotEmpty) {
+                  vm.search(value);
+                }
+              },
+              decoration: InputDecoration(
+                  labelText: "Search",
+                  icon: const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Icon(Icons.search),
+                  ),
+                  suffixIcon: IconButton(
+                    icon: const Icon(Icons.clear),
+                    onPressed: () {
+                      _controller.clear();
+                    },
+                  )),
+            ),
+            _buildList(context, vm)
+          ])),
+    );
   }
 }

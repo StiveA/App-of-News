@@ -11,14 +11,20 @@ void main() {
       providers: [
         ChangeNotifierProvider(create: (_) => NewsArticleListViewModel()),
       ],
-      child: App(),
+      child: const App(),
     ),
   );
 }
 
 class App extends StatelessWidget {
+  const App({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(title: "Fresh News", home: NewsListPage());
+    return const MaterialApp(
+      title: "NoticiaTop",
+      home: NewsListPage(),
+      debugShowCheckedModeBanner: false,
+    );
   }
 }
